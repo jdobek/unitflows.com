@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unitflows</title>
+  <meta name="description" content="Unitflows builds simple, focused mobile apps. Maker of Core – Workout Planner.">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="icon" href="core-icon.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0d0d;
+      --text: #f2f2f2;
+      --muted: #9a9a9a;
+      --line: #262626;
+      --card: #171717;
+      --accent: #e5484d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 17px/1.55 "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 32px 20px 64px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { display: block; height: 24px; width: auto; }
+    .lang { display: flex; gap: 4px; }
+    .lang button {
+      font: inherit; font-size: 14px; color: var(--muted); background: none;
+      border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer;
+    }
+    .lang button[aria-pressed="true"] { color: var(--text); border-color: var(--line); }
+    h1 { font-size: clamp(36px, 8vw, 56px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; margin: 72px 0 16px; }
+    h1 { color: #ffffff; }
+    .lead { color: var(--muted); font-size: 19px; max-width: 34em; margin: 0; }
+    h2 { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 64px 0 16px; }
+    .app {
+      display: flex; gap: 20px; align-items: center;
+      background: var(--card); border-radius: 24px; padding: 20px;
+    }
+    .app img { width: 80px; height: 80px; border-radius: 18px; flex: none; }
+    .app h3 { margin: 0 0 4px; font-size: 20px; font-weight: 500; }
+    .app p { margin: 0 0 10px; color: var(--muted); font-size: 15px; }
+    .links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 15px; }
+    a { color: var(--text); text-decoration-color: var(--line); text-underline-offset: 3px; }
+    a:hover { text-decoration-color: var(--accent); }
+    .badge { color: var(--muted); }
+    .contact { font-size: 19px; }
+    footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    [lang="pl"] .en, [lang="en"] .pl { display: none; }
+    @media (max-width: 480px) {
+      .app { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <img class="logo" src="logo.svg" width="175" height="24" alt="unitflows">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pl">PL</button>
+      </div>
+    </header>
+
+    <h1>
+      <span class="en">Simple apps<br><span>for everyday flow.</span></span>
+      <span class="pl">Proste aplikacje<br><span>na każdy dzień.</span></span>
+    </h1>
+    <p class="lead">
+      <span class="en">Unitflows designs and builds focused mobile apps that do one thing well – no accounts, no ads, no tracking.</span>
+      <span class="pl">Unitflows projektuje i tworzy aplikacje mobilne skupione na jednym zadaniu – bez kont, bez reklam i bez śledzenia.</span>
+    </p>
+
+    <h2><span class="en">Apps</span><span class="pl">Aplikacje</span></h2>
+    <article class="app">
+      <img src="core-icon.png" alt="Core app icon">
+      <div>
+        <h3>Core – Workout Planner</h3>
+        <p>
+          <span class="en">Plan your week, log every set and learn each move from short videos.</span>
+          <span class="pl">Zaplanuj tydzień, zapisuj każdą serię i ucz się ruchów z krótkich filmów.</span>
+        </p>
+        <div class="links">
+          <span class="badge"><span class="en">Coming soon to the App Store</span><span class="pl">Wkrótce w App Store</span></span>
+          <a href="https://jdobek.github.io/core-privacy/" data-href-en="https://jdobek.github.io/core-privacy/#en" data-href-pl="https://jdobek.github.io/core-privacy/#pl">
+            <span class="en">Privacy policy</span><span class="pl">Polityka prywatności</span>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <h2><span class="en">Contact</span><span class="pl">Kontakt</span></h2>
+    <p class="contact"><a href="mailto:kontakt@unitflows.com">kontakt@unitflows.com</a></p>
+
+    <h2><span class="en">This website</span><span class="pl">Ta strona</span></h2>
+    <p class="lead">
+      <span class="en">This website uses no cookies, analytics or tracking and does not collect any personal data.</span>
+      <span class="pl">Ta strona nie używa plików cookie, analityki ani śledzenia i nie zbiera żadnych danych osobowych.</span>
+    </p>
+
+    <footer>© <span id="year">2026</span> Jakub Dobek Unitflows</footer>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('[data-lang]');
+    const policy = document.querySelector('[data-href-en]');
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+      policy.href = policy.dataset['href' + (lang === 'pl' ? 'Pl' : 'En')];
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    let saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    setLang(saved || (navigator.language.toLowerCase().startsWith('pl') ? 'pl' : 'en'));
+    buttons.forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
