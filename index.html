@@ -40,22 +40,46 @@
     h1 { color: #ffffff; }
     .lead { color: var(--muted); font-size: 19px; max-width: 34em; margin: 0; }
     h2 { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 64px 0 16px; }
-    .app {
-      display: flex; gap: 20px; align-items: center;
-      background: var(--card); border-radius: 24px; padding: 20px;
-    }
-    .app img { width: 80px; height: 80px; border-radius: 18px; flex: none; }
-    .app h3 { margin: 0 0 4px; font-size: 20px; font-weight: 500; }
-    .app p { margin: 0 0 10px; color: var(--muted); font-size: 15px; }
-    .links { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 15px; }
     a { color: var(--text); text-decoration-color: var(--line); text-underline-offset: 3px; }
     a:hover { text-decoration-color: var(--accent); }
-    .badge { color: var(--muted); }
+
+    /* Kafelek aplikacji: u góry ikona i nazwa, pod nimi opis, na dole czarny pas ze sklepami */
+    .app {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .app-body { padding: 28px 28px 24px; }
+    .app-head { display: flex; align-items: center; gap: 20px; }
+    .app-icon { width: 88px; height: 88px; border-radius: 20px; flex: none; }
+    .app-name { margin: 0; font-size: 30px; line-height: 1.1; font-weight: 500; letter-spacing: -0.02em; color: #fff; }
+    .app-kind { margin: 4px 0 0; font-size: 15px; color: var(--muted); }
+    .app-desc { margin: 20px 0 0; font-size: 16px; color: var(--muted); }
+    /* Na szerokim ekranie opis w jednej linii; na telefonie zawija się normalnie */
+    @media (min-width: 720px) { .app-desc { white-space: nowrap; } }
+
+    .app-stores {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 16px 24px;
+      background: #000;
+      padding: 20px 28px;
+    }
+    .stores { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+    .stores a { display: block; line-height: 0; }
+    .store-apple { display: block; height: 48px; width: auto; flex: none; }
+    /* Odznaka Google ma przezroczysty margines – ta sama widoczna wysokość co odznaka Apple */
+    .store-google { display: block; height: 72px; width: auto; max-width: none; flex: none; margin: -12px; }
+    .privacy { font-size: 14px; color: var(--muted); text-decoration: none; }
+    .privacy:hover { color: var(--text); }
     .contact { font-size: 19px; }
     footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
     [lang="pl"] .en, [lang="en"] .pl { display: none; }
     @media (max-width: 480px) {
-      .app { flex-direction: column; align-items: flex-start; }
+      .app-body { padding: 24px 20px 20px; }
+      .app-stores { padding: 20px; }
+      .app-icon { width: 72px; height: 72px; border-radius: 16px; }
+      .app-name { font-size: 26px; }
     }
   </style>
 </head>
@@ -80,19 +104,31 @@
 
     <h2><span class="en">Apps</span><span class="pl">Aplikacje</span></h2>
     <article class="app">
-      <img src="core-icon.png" alt="Core app icon">
-      <div>
-        <h3>Core – Workout Planner</h3>
-        <p>
+      <div class="app-body">
+        <div class="app-head">
+          <img class="app-icon" src="core-icon.png" width="88" height="88" alt="Core app icon">
+          <div>
+            <h3 class="app-name">Core</h3>
+            <p class="app-kind">Workout Planner</p>
+          </div>
+        </div>
+        <p class="app-desc">
           <span class="en">Plan your week, log every set and learn each move from short videos.</span>
           <span class="pl">Zaplanuj tydzień, zapisuj każdą serię i ucz się ruchów z krótkich filmów.</span>
         </p>
-        <div class="links">
-          <span class="badge"><span class="en">Coming soon to the App Store</span><span class="pl">Wkrótce w App Store</span></span>
-          <a href="https://jdobek.github.io/core-privacy/" data-href-en="https://jdobek.github.io/core-privacy/#en" data-href-pl="https://jdobek.github.io/core-privacy/#pl">
-            <span class="en">Privacy policy</span><span class="pl">Polityka prywatności</span>
+      </div>
+      <div class="app-stores">
+        <div class="stores">
+          <a href="https://apps.apple.com/app/id6831122366" aria-label="Download Core on the App Store">
+            <img class="store-apple" src="app-store-badge.svg" width="144" height="48" alt="Download on the App Store">
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.jdobek.core" aria-label="Get Core on Google Play">
+            <img class="store-google" src="google-play-badge.png" width="186" height="72" alt="Get it on Google Play">
           </a>
         </div>
+        <a class="privacy" href="https://jdobek.github.io/core-privacy/" data-href-en="https://jdobek.github.io/core-privacy/#en" data-href-pl="https://jdobek.github.io/core-privacy/#pl">
+          <span class="en">Privacy policy</span><span class="pl">Polityka prywatności</span>
+        </a>
       </div>
     </article>
 
